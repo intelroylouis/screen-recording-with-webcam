@@ -132,6 +132,11 @@ export const micAnalyzer = derived(micState, ($micState) => {
 });
 
 /**
+ * Screen stream
+ */
+export const screenStream = writable<MediaStream>(null);
+
+/**
  * Canvas stream
  */
 export const canvasStream = writable<MediaStream>(null);

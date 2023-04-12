@@ -1,6 +1,7 @@
 <script lang="ts">
   import Preview from "./components/Preview.svelte";
   import {
+    screenStream,
     canvasStream,
     isRecording,
     micState,
@@ -46,13 +47,14 @@
     }, 500);
   };
 
-  const startRecording = () => {
+  const startRecording = async() => {
     $recordingStartTime = performance.now();
     chunks.length = 0;
 
     const combinedStream = new MediaStream([
       ...($canvasStream?.getTracks() || []),
       ...($micState.stream?.getTracks() || []),
+      ...($screenStream?.getTracks() || []),
     ]);
     // TODO: dynamic bits per second based on resolution...
     const mime = getPreferredMimeType();

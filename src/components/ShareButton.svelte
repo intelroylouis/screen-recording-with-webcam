@@ -1,7 +1,7 @@
 <script lang="ts">
   import ActionButton from "./ActionButton.svelte";
   import type { ScreenShareState } from "../stores";
-  import { activeShare, screenShareState } from "../stores.js";
+  import { activeShare, screenShareState, screenStream } from "../stores.js";
   import { onMount } from "svelte";
   import LoadingDots from "./icons/loadingDots.icon.svelte";
   import CloseIcon from "./icons/close.icon.svelte";
@@ -16,6 +16,7 @@
         video: true,
         audio: true
       });
+      $screenStream = share.stream;
       share.preview.srcObject = share.stream;
       grabDimensions();
       share.stream.getVideoTracks()[0].onended = stopSharing;
